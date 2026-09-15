@@ -1,36 +1,137 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Wasiullah Sahito | Portfolio
+
+Personal portfolio website for Wasiullah Sahito, a backend-focused full stack developer specializing in Laravel, Node.js, React.js, REST APIs, and real-time SaaS systems.
+
+## Live Demo
+
+- Website: https://devwasiullah.netlify.app
+- GitHub: https://github.com/WasiullahSahito
+
+## About
+
+This portfolio showcases:
+
+- Backend-first software engineering work
+- Full stack product development experience
+- Project highlights and technical case studies
+- Contact and resume download section
+- Responsive, modern UI built with Next.js
+
+## Tech Stack
+
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS
+- GSAP / Framer Motion style animations
+- Lucide + React Icons
+- Netlify deployment
+
+## Features
+
+- Modern landing page and hero section
+- About, experience, and skills sections
+- Project portfolio with detailed case studies
+- Resume download support
+- Contact form integration
+- Fully responsive design
+- SEO metadata and social preview configuration
+
+## Project Structure
+
+```bash
+.
+├── app/
+│   ├── api/
+│   ├── projects/
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── components/
+│   ├── 3d/
+│   ├── animations/
+│   ├── hero/
+│   ├── navigation/
+│   ├── sections/
+│   └── ui/
+├── data/
+│   ├── experience.ts
+│   ├── projects.ts
+│   └── skills.ts
+├── lib/
+│   ├── hooks.ts
+│   ├── site-config.ts
+│   └── utils.ts
+├── public/
+│   └── wasiullah-sahito-resume.pdf
+├── package.json
+├── next.config.ts
+├── tsconfig.json
+├── README.md
+└── .gitignore
+```
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- npm or pnpm
+
+### Installation
+
+```bash
+npm install
+```
+
+### Run locally
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Production build
 
-## Learn More
+```bash
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Start production server
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Resume
 
-## Deploy on Vercel
+The resume file is stored in the public folder and is available for download from the portfolio website:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+public/wasiullah-sahito-resume.pdf
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment
+
+This project is configured for deployment on Netlify / Vercel-style hosting with Next.js support.
+
+## Contact
+
+- Email: wasi1237585@gmail.com
+- Phone: +92 333 4698244
+- Location: Karachi, Sindh, Pakistan
+- GitHub: https://github.com/WasiullahSahito
+
+## License
+
+This project is intended for personal portfolio use.
+
+## Author
+
+Wasiullah Sahito
+Software Engineer | Backend & Full Stack Development
