@@ -12,13 +12,19 @@ export const siteConfig = {
   linkedin: process.env.NEXT_PUBLIC_LINKEDIN_URL || undefined,
   x: process.env.NEXT_PUBLIC_X_URL || undefined,
   resumeUrl: process.env.NEXT_PUBLIC_RESUME_URL || "/wasiullah-sahito-resume.pdf",
+  tagline: "I build production-ready software systems — from architecture to deployment.",
+  heroHeadline: "Building digital products that scale.",
+  heroSupport:
+    "I design and engineer production-ready software systems, from backend architecture and APIs to modern interfaces and AI-powered applications.",
+  availability: "Available for remote opportunities",
   positioning:
     "Backend-focused Full Stack Developer specializing in Laravel, Node.js, React.js, RESTful API design, real-time systems, and scalable SaaS architecture.",
   description:
-    "Wasiullah Sahito is a backend-focused Full Stack Developer specializing in Laravel, Node.js, and React.js — building production SaaS applications, real-time systems, and secure APIs with RBAC and optimized database access.",
+    "Portfolio of Wasiullah Sahito, a Full Stack Software Engineer specializing in Laravel, React, Node.js, Python, AI integrations, APIs, and production-ready applications.",
   navLinks: [
     { href: "#about", label: "About" },
     { href: "#skills", label: "Skills" },
+    { href: "#ai", label: "AI" },
     { href: "#projects", label: "Work" },
     { href: "#experience", label: "Experience" },
     { href: "#contact", label: "Contact" },

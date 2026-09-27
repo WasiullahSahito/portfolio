@@ -9,11 +9,10 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { useProgress } from "@react-three/drei";
 import { usePrefersReducedMotion } from "@/lib/hooks";
 import { PortfolioLoader } from "./portfolio-loader";
 
-const MIN_DURATION_MS = 1700;
+const MIN_DURATION_MS = 600;
 
 const AppReadyContext = createContext(false);
 
@@ -27,7 +26,6 @@ export function LoadingProvider({ children }: { children: ReactNode }) {
   const [appReady, setAppReady] = useState(false);
   const [progress, setProgress] = useState(0);
   const startRef = useRef<number | null>(null);
-  const { progress: realProgress, active } = useProgress();
 
   useEffect(() => {
     let frame: number;
@@ -40,9 +38,7 @@ export function LoadingProvider({ children }: { children: ReactNode }) {
 
       if (startRef.current === null) startRef.current = time;
       const elapsed = time - startRef.current;
-      const timeProgress = Math.min(100, (elapsed / MIN_DURATION_MS) * 100);
-      const effectiveReal = active ? realProgress : 100;
-      const next = Math.min(timeProgress, effectiveReal);
+      const next = Math.min(100, (elapsed / MIN_DURATION_MS) * 100);
       setProgress(next);
 
       if (next >= 100) {
@@ -53,7 +49,7 @@ export function LoadingProvider({ children }: { children: ReactNode }) {
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [prefersReducedMotion, active, realProgress]);
+  }, [prefersReducedMotion]);
 
   const handleExitComplete = useCallback(() => setShowLoader(false), []);
 

@@ -35,7 +35,10 @@ export function Navbar() {
   }, [menuOpen]);
 
   return (
-    <header
+    <motion.header
+      initial={{ y: -32, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
         menuOpen
@@ -117,6 +120,6 @@ export function Navbar() {
       </nav>
 
       <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
-    </header>
+    </motion.header>
   );
 }

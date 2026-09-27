@@ -1,21 +1,22 @@
 @import "tailwindcss";
 
 :root {
-  --background: #060810;
-  --background-elevated: #0b0e18;
-  --surface: #0f1220;
-  --surface-hover: #151a2c;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.16);
-  --foreground: #f3f5fa;
-  --muted: #8b93a7;
-  --muted-foreground: #a3abbf;
-  --accent: #5eead4;
-  --accent-strong: #22d3ee;
-  --accent-violet: #8b8cf8;
-  --accent-foreground: #04120f;
+  /* Deep graphite base, warm white text, electric violet + subtle blue accent. */
+  --background: #08080a;
+  --background-elevated: #0d0d10;
+  --surface: #131316;
+  --surface-hover: #1a1a1f;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --foreground: #f6f4f0;
+  --muted: #8f8b86;
+  --muted-foreground: #a8a49e;
+  --accent: #a855f7;
+  --accent-strong: #9333ea;
+  --accent-violet: #5b9dff;
+  --accent-foreground: #0c0518;
   --glow-purple: #a855f7;
-  --glow-pink: #ec4899;
+  --glow-pink: #d946a8;
   --radius: 0.875rem;
   --radius-sm: 0.5rem;
   --radius-lg: 1.5rem;

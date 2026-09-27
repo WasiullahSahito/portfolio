@@ -23,9 +23,9 @@ const pillars = [
   },
   {
     icon: Bot,
-    title: "AI-assisted, not AI-dependent",
+    title: "Trusted with real budgets",
     description:
-      "I use tools like Copilot and the OpenAI API to move faster day to day, but the architecture, the tradeoffs, and the debugging are still mine to own.",
+      "From a promotion after a 3-month internship to a client relationship I've maintained since 2022, people keep me around because the systems I build keep running.",
   },
 ];
 
@@ -35,8 +35,8 @@ export function About() {
       <div className="pointer-events-none absolute inset-0 bg-grid opacity-[0.04]" />
       <div className="relative mx-auto max-w-6xl px-6">
         <SectionHeading
-          eyebrow="About"
-          title="A backend-first software engineer building production systems"
+          eyebrow="About Studio"
+          title="A backend-first engineering practice built around one engineer"
           description="I'm Wasiullah Sahito, a Software Engineer focused on backend and full-stack development. I design and build secure APIs, relational data models, role-based access systems, and real-time application workflows that power SaaS products in production."
         />
 
@@ -61,10 +61,9 @@ export function About() {
             My approach to a new feature starts with the data: what needs to
             be stored, who is allowed to touch it, and how it moves through
             an API before it ever reaches a screen. That discipline comes
-            from building SaaS-style systems like fleet management and
-            booking platforms — production applications now supporting 500+
-            users, where optimization and caching work has cut response
-            times by up to 30%.
+            from building live systems like FleetMove and Daytrip — real
+            ride-hailing and booking platforms in production for Irish
+            clients, not portfolio demos.
           </p>
         </Reveal>
       </div>

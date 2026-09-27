@@ -74,3 +74,28 @@ export function RevealGroup({
 }
 
 export const revealItemVariants: Variants = variants;
+
+/** A single staggered child of <RevealGroup> — no independent viewport trigger. */
+export function RevealItem({
+  children,
+  className,
+  as = "div",
+}: {
+  children: ReactNode;
+  className?: string;
+  as?: "div" | "li";
+}) {
+  const shouldReduceMotion = useReducedMotion();
+  const Component = as === "li" ? motion.li : motion.div;
+
+  if (shouldReduceMotion) {
+    const Static = as;
+    return <Static className={className}>{children}</Static>;
+  }
+
+  return (
+    <Component className={className} variants={variants}>
+      {children}
+    </Component>
+  );
+}

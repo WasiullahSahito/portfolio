@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 import { useLenis } from "lenis/react";
 
 export function useMediaQuery(query: string) {
@@ -24,79 +24,6 @@ export function usePrefersReducedMotion() {
 
 export function useIsTouchDevice() {
   return useMediaQuery("(pointer: coarse)");
-}
-
-function detectWebgl() {
-  if (typeof window === "undefined") return false;
-  try {
-    const canvas = document.createElement("canvas");
-    return !!(
-      window.WebGLRenderingContext &&
-      (canvas.getContext("webgl2") || canvas.getContext("webgl"))
-    );
-  } catch {
-    return false;
-  }
-}
-
-let cachedWebglSupport: boolean | null = null;
-
-function subscribeOnce() {
-  return () => {};
-}
-
-export function useWebglSupport() {
-  return useSyncExternalStore(
-    subscribeOnce,
-    () => {
-      if (cachedWebglSupport === null) cachedWebglSupport = detectWebgl();
-      return cachedWebglSupport;
-    },
-    () => null
-  );
-}
-
-export function useAssetExists(url: string) {
-  const [exists, setExists] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    fetch(url, { method: "HEAD" })
-      .then((res) => {
-        if (!cancelled) setExists(res.ok);
-      })
-      .catch(() => {
-        if (!cancelled) setExists(false);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [url]);
-
-  return exists;
-}
-
-export function useInView<T extends HTMLElement>(rootMargin = "200px") {
-  const ref = useRef<T>(null);
-  const [inView, setInView] = useState(false);
-
-  useEffect(() => {
-    if (inView || !ref.current) return;
-    const el = ref.current;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [inView, rootMargin]);
-
-  return { ref, inView };
 }
 
 export function useAnchorScroll() {

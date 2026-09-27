@@ -15,9 +15,9 @@ export default async function Image() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "80px",
-          background: "#060810",
+          background: "#08080a",
           backgroundImage:
-            "radial-gradient(circle at 15% 20%, rgba(94,234,212,0.25), transparent 45%), radial-gradient(circle at 85% 80%, rgba(139,140,248,0.25), transparent 45%)",
+            "radial-gradient(circle at 15% 20%, rgba(168,85,247,0.25), transparent 45%), radial-gradient(circle at 85% 80%, rgba(91,157,255,0.22), transparent 45%)",
         }}
       >
         <div
@@ -26,7 +26,7 @@ export default async function Image() {
             fontSize: 28,
             letterSpacing: 8,
             textTransform: "uppercase",
-            color: "#5eead4",
+            color: "#a855f7",
             fontFamily: "monospace",
           }}
         >
@@ -38,7 +38,7 @@ export default async function Image() {
             marginTop: 28,
             fontSize: 96,
             fontWeight: 600,
-            color: "#f3f5fa",
+            color: "#f6f4f0",
           }}
         >
           {siteConfig.name}
@@ -48,11 +48,11 @@ export default async function Image() {
             display: "flex",
             marginTop: 28,
             fontSize: 30,
-            color: "#a3abbf",
+            color: "#a8a49e",
             maxWidth: 900,
           }}
         >
-          Laravel · React.js · Node.js · REST APIs · SaaS
+          Laravel · React · Node.js · Python · AI Integrations · APIs
         </div>
       </div>
     ),

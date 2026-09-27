@@ -7,6 +7,28 @@ import { getProjectBySlug, projects } from "@/data/projects";
 import { siteConfig } from "@/lib/site-config";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { PipelineFlow } from "@/components/pipeline/pipeline-flow";
+import type { ReactNode } from "react";
+
+function CaseStudySection({
+  index,
+  title,
+  children,
+}: {
+  index: number;
+  title: string;
+  children: ReactNode;
+}) {
+  return (
+    <section>
+      <div className="flex items-baseline gap-4">
+        <span className="font-mono text-sm text-accent">{String(index).padStart(2, "0")}</span>
+        <h2 className="text-xl font-medium text-foreground">{title}</h2>
+      </div>
+      <div className="mt-5 pl-9">{children}</div>
+    </section>
+  );
+}
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -124,31 +146,39 @@ export default async function ProjectPage({
           </div>
         </header>
 
-        <div className="mt-16 flex flex-col gap-14">
-          <section>
-            <h2 className="text-xl font-medium text-foreground">Overview</h2>
-            <p className="mt-4 leading-relaxed text-muted-foreground">
-              {project.overview}
-            </p>
-          </section>
+        <div className="mt-14">
+          <h2 className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
+            System flow
+          </h2>
+          <PipelineFlow stages={project.pipeline} size="lg" className="mt-5" />
+        </div>
 
-          <section>
-            <h2 className="text-xl font-medium text-foreground">The problem</h2>
-            <p className="mt-4 leading-relaxed text-muted-foreground">
-              {project.problem}
-            </p>
-          </section>
+        <div className="mt-20 flex flex-col gap-16">
+          <CaseStudySection index={1} title="Overview">
+            <p className="leading-relaxed text-muted-foreground">{project.overview}</p>
+          </CaseStudySection>
 
-          <section>
-            <h2 className="text-xl font-medium text-foreground">The solution</h2>
-            <p className="mt-4 leading-relaxed text-muted-foreground">
-              {project.solution}
-            </p>
-          </section>
+          <CaseStudySection index={2} title="Challenge">
+            <p className="leading-relaxed text-muted-foreground">{project.problem}</p>
+          </CaseStudySection>
 
-          <section>
-            <h2 className="text-xl font-medium text-foreground">Features</h2>
-            <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+          <CaseStudySection index={3} title="Architecture">
+            <ul className="flex flex-col gap-3">
+              {project.architecture.map((item) => (
+                <li
+                  key={item}
+                  className="border-l-2 border-accent/40 pl-4 text-sm leading-relaxed text-muted-foreground"
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </CaseStudySection>
+
+          <CaseStudySection index={4} title="Development">
+            <p className="leading-relaxed text-muted-foreground">{project.solution}</p>
+
+            <ul className="mt-6 grid gap-3 sm:grid-cols-2">
               {project.features.map((feature) => (
                 <li
                   key={feature}
@@ -159,24 +189,10 @@ export default async function ProjectPage({
                 </li>
               ))}
             </ul>
-          </section>
 
-          <section>
-            <h2 className="text-xl font-medium text-foreground">Architecture</h2>
-            <ul className="mt-4 flex flex-col gap-3">
-              {project.architecture.map((item) => (
-                <li
-                  key={item}
-                  className="border-l-2 border-accent/40 pl-4 text-sm leading-relaxed text-muted-foreground"
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          <section>
-            <h2 className="text-xl font-medium text-foreground">Challenges</h2>
+            <p className="mt-8 font-mono text-xs uppercase tracking-[0.2em] text-muted">
+              Engineering challenges
+            </p>
             <ul className="mt-4 flex flex-col gap-3">
               {project.challenges.map((item) => (
                 <li
@@ -187,14 +203,21 @@ export default async function ProjectPage({
                 </li>
               ))}
             </ul>
-          </section>
+          </CaseStudySection>
 
-          <section>
-            <h2 className="text-xl font-medium text-foreground">Results</h2>
-            <p className="mt-4 leading-relaxed text-muted-foreground">
-              {project.results}
-            </p>
-          </section>
+          <CaseStudySection index={5} title="Technology">
+            <div className="flex flex-wrap gap-2.5">
+              {project.technologies.map((tech) => (
+                <Badge key={tech} className="px-4 py-1.5 text-sm">
+                  {tech}
+                </Badge>
+              ))}
+            </div>
+          </CaseStudySection>
+
+          <CaseStudySection index={6} title="Result">
+            <p className="leading-relaxed text-muted-foreground">{project.results}</p>
+          </CaseStudySection>
         </div>
 
         <div className="mt-20 border-t border-border pt-10">

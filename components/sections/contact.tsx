@@ -5,13 +5,13 @@ import { siteConfig } from "@/lib/site-config";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { ContactForm } from "@/components/sections/contact-form";
 import { Reveal } from "@/components/animations/reveal";
-import { ContactVisual } from "@/components/3d/contact-visual";
+import { FloatingOrbs } from "@/components/contact/floating-orbs";
 
 export function Contact() {
   return (
     <section id="contact" className="relative overflow-hidden py-28 sm:py-36">
       <div className="pointer-events-none absolute inset-0 cinematic-glow opacity-60" />
-      <ContactVisual />
+      <FloatingOrbs />
       <div className="relative mx-auto max-w-6xl px-6">
         <div className="grid gap-16 lg:grid-cols-[1fr_1.2fr]">
           <div>

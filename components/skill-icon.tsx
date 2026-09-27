@@ -17,15 +17,32 @@ import {
   SiPostgresql,
   SiMongodb,
   SiGit,
+  SiGithub,
   SiDocker,
   SiPostman,
   SiN8N,
   SiVercel,
   SiLinux,
   SiGithubcopilot,
+  SiStripe,
+  SiGraphql,
+  SiFirebase,
 } from "react-icons/si";
 import { FaAws } from "react-icons/fa6";
-import { Bot, Network, Radio, Sparkles, type LucideIcon } from "lucide-react";
+import {
+  Bot,
+  CreditCard,
+  Database,
+  Mail,
+  MapPin,
+  Network,
+  Radio,
+  Server,
+  ShieldCheck,
+  Sparkles,
+  TestTube,
+  type LucideIcon,
+} from "lucide-react";
 import type { IconType } from "react-icons";
 
 const iconMap: Record<string, IconType | LucideIcon> = {
@@ -49,6 +66,7 @@ const iconMap: Record<string, IconType | LucideIcon> = {
   api: Network,
   websockets: Radio,
   git: SiGit,
+  github: SiGithub,
   docker: SiDocker,
   postman: SiPostman,
   n8n: SiN8N,
@@ -58,6 +76,19 @@ const iconMap: Record<string, IconType | LucideIcon> = {
   ai: Bot,
   copilot: SiGithubcopilot,
   "ai-workflow": Sparkles,
+  database: Database,
+  shield: ShieldCheck,
+  test: TestTube,
+  graphql: SiGraphql,
+  stripe: SiStripe,
+  payment: CreditCard,
+  maps: MapPin,
+  firebase: SiFirebase,
+  mail: Mail,
+  gemini: Sparkles,
+  openai: Bot,
+  claude: Bot,
+  server: Server,
 };
 
 export function SkillIcon({ icon, className }: { icon: string; className?: string }) {

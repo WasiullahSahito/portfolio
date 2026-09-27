@@ -1,3 +1,6 @@
+"use client";
+
+import { useRef } from "react";
 import { GraduationCap } from "lucide-react";
 import { education, experience } from "@/data/experience";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -14,6 +17,8 @@ function formatPeriod(start: string, end: string) {
 }
 
 export function Experience() {
+  const timelineRef = useRef<HTMLOListElement>(null);
+
   return (
     <section id="experience" className="relative overflow-hidden py-28 sm:py-36">
       <div className="pointer-events-none absolute inset-0 bg-grid opacity-[0.04]" />
@@ -25,10 +30,11 @@ export function Experience() {
         />
 
         <ol
+          ref={timelineRef}
           id="experience-timeline"
           className="relative mt-16 space-y-10 border-l border-border pl-8"
         >
-          <ScrollProgressLine targetSelector="#experience-timeline" />
+          <ScrollProgressLine containerRef={timelineRef} />
           {experience.map((entry, i) => (
             <Reveal key={entry.company} as="li" delay={i * 0.1}>
               <span className="absolute -left-[7px] mt-1.5 h-3 w-3 rounded-full border-2 border-accent bg-background" />
