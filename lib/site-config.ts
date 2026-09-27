@@ -16,7 +16,7 @@ export const siteConfig = {
   heroHeadline: "Building digital products that scale.",
   heroSupport:
     "I design and engineer production-ready software systems, from backend architecture and APIs to modern interfaces and AI-powered applications.",
-  availability: "Available for remote opportunities",
+  availability: "Available to Work",
   positioning:
     "Backend-focused Full Stack Developer specializing in Laravel, Node.js, React.js, RESTful API design, real-time systems, and scalable SaaS architecture.",
   description:
