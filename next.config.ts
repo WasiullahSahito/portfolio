@@ -8,6 +8,12 @@ const nextConfig: NextConfig = {
     // Earlier URL structures. Case studies that no longer exist land on the
     // experience page, where those projects are still described.
     return [
+      { source: "/projects/oddco-studios", destination: "/work/oddco-studios", permanent: true },
+      { source: "/project/oddco-studios", destination: "/work/oddco-studios", permanent: true },
+      { source: "/projects/daytrip", destination: "/work/daytrip", permanent: true },
+      { source: "/project/daytrip", destination: "/work/daytrip", permanent: true },
+      { source: "/projects/fleetmove", destination: "/work/fleetmove", permanent: true },
+      { source: "/project/fleetmove", destination: "/work/fleetmove", permanent: true },
       { source: "/projects/onlymetric", destination: "/work/onlymetric", permanent: true },
       { source: "/project/onlymetric", destination: "/work/onlymetric", permanent: true },
       { source: "/project/happy-hour", destination: "/work/onlymetric", permanent: true },

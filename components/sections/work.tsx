@@ -22,8 +22,8 @@ export function Work({ page = false }: { page?: boolean }) {
             </Heading>
           </div>
           <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
-            Two projects, each a system rather than a page: a restaurant operations platform with AI
-            built in, and a retrieval-augmented academic assistant.
+            A restaurant operations platform with AI built in, two live taxi platforms, a
+            retrieval-augmented academic assistant, and a freelance marketing site.
           </p>
         </div>
 

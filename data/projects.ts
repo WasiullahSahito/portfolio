@@ -1,4 +1,18 @@
-import type { FlowDiagram, FlowLayer, FlowNode } from "./architecture";
+import {
+  paymentsDiagram,
+  realtimeDiagram,
+  type FlowDiagram,
+  type FlowLayer,
+  type FlowNode,
+} from "./architecture";
+
+export type Screenshot = {
+  src: string;
+  alt: string;
+  caption: string;
+  width: number;
+  height: number;
+};
 
 export type Project = {
   slug: string;
@@ -21,8 +35,12 @@ export type Project = {
   diagrams: FlowDiagram[];
   /** Only links that have actually been provided. */
   links: { github?: string; live?: string };
-  /** Selects the visual composition in components/work/project-visual. */
-  visual: "onlymetric" | "szabot";
+  /** Real product screenshots. The first one is used as the project's main visual. */
+  screenshots?: Screenshot[];
+  /** Shown under the gallery, e.g. what has been blurred. */
+  screenshotNote?: string;
+  /** Fallback schematic used when there are no screenshots. */
+  visual: "onlymetric" | "szabot" | "fleetmove" | "daytrip" | "oddco";
 };
 
 const step = (id: string, label: string, description: string, tech?: string): FlowLayer => ({
@@ -107,7 +125,204 @@ export const projects: Project[] = [
       },
     ],
     links: {},
+    screenshots: [
+      {
+        src: "/projects/onlymetric/dashboard.webp",
+        alt: "OnlyMetric dashboard with cost of goods, potential savings, price alert, invoice, recipe and supplier summary cards.",
+        caption: "Dashboard",
+        width: 1902,
+        height: 911,
+      },
+      {
+        src: "/projects/onlymetric/invoices.webp",
+        alt: "OnlyMetric invoice management screen listing supplier invoices with their processing status.",
+        caption: "Invoice management",
+        width: 1902,
+        height: 911,
+      },
+      {
+        src: "/projects/onlymetric/pos.webp",
+        alt: "OnlyMetric point of sale terminal with an order panel, dine-in and takeaway options, and payment controls.",
+        caption: "POS terminal",
+        width: 1902,
+        height: 911,
+      },
+      {
+        src: "/projects/onlymetric/suppliers.webp",
+        alt: "OnlyMetric supplier management screen with supplier totals and a supplier table.",
+        caption: "Supplier management",
+        width: 1902,
+        height: 911,
+      },
+    ],
+    screenshotNote: "Supplier contact details are blurred.",
     visual: "onlymetric",
+  },
+  {
+    slug: "daytrip",
+    name: "Daytrip",
+    category: "Taxi Booking Platform",
+    type: "Built at Digitize LLC",
+    year: "2026",
+    technologies: ["Laravel 13", "React 19", "PostgreSQL", "Stripe", "SumUp", "PHPUnit"],
+    overview:
+      "Daytrip (daytrip.ie) is a taxi booking platform with a Laravel 13 REST API and a React 19 single-page application (SPA), featuring server-side fare calculation, scheduled bookings, and an admin panel.",
+    built: [
+      "Built Daytrip (daytrip.ie), a taxi booking platform with a Laravel 13 REST API and a React 19 single-page application (SPA), featuring server-side fare calculation, scheduled bookings, and an admin panel.",
+      "Integrated Stripe (PaymentIntents, signed webhooks) and SumUp payment processing, and wrote PHPUnit tests.",
+      "Deployed Daytrip to production on a Contabo VPS running Ubuntu Linux, OpenLiteSpeed, and PostgreSQL.",
+    ],
+    highlights: [
+      "Server-side fare calculation and scheduled bookings",
+      "Stripe and SumUp payment processing",
+      "Deployed on a Contabo VPS with Ubuntu, OpenLiteSpeed, and PostgreSQL",
+    ],
+    features: [
+      "Laravel 13 REST API with a React 19 single-page application",
+      "Server-side fare calculation",
+      "Scheduled bookings",
+      "Admin panel",
+      "Stripe payments with PaymentIntents and signed webhooks",
+      "SumUp payment processing",
+      "PHPUnit tests",
+    ],
+    challenges: [
+      "Calculating fares server-side.",
+      "Supporting two payment providers, Stripe and SumUp.",
+      "Taking the platform to production on a self-managed Linux VPS.",
+    ],
+    diagrams: [
+      {
+        id: "stack",
+        label: "Stack",
+        layers: [
+          step("spa", "React 19 SPA", "A React 19 single-page application.", "React 19"),
+          step(
+            "api",
+            "Laravel 13 REST API",
+            "A Laravel 13 REST API with server-side fare calculation, scheduled bookings, and an admin panel.",
+            "Laravel 13"
+          ),
+          step("pg", "PostgreSQL", "PostgreSQL in production."),
+          step(
+            "vps",
+            "Contabo VPS",
+            "Production deployment on a Contabo VPS running Ubuntu Linux, OpenLiteSpeed, and PostgreSQL.",
+            "Ubuntu · OpenLiteSpeed"
+          ),
+        ],
+      },
+      paymentsDiagram,
+    ],
+    links: { live: "https://daytrip.ie" },
+    screenshots: [
+      {
+        src: "/projects/daytrip/landing.webp",
+        alt: "Daytrip landing page with a booking panel for pickup location and destination and a Book a ride button.",
+        caption: "Landing page",
+        width: 1902,
+        height: 911,
+      },
+      {
+        src: "/projects/daytrip/booking.webp",
+        alt: "Daytrip booking screen with pickup and destination fields, pickup date and time, passenger details, number of passengers, waiting time, and a map preview.",
+        caption: "Booking screen",
+        width: 1902,
+        height: 911,
+      },
+      {
+        src: "/projects/daytrip/login.webp",
+        alt: "Daytrip login screen with email and password fields.",
+        caption: "Login",
+        width: 1902,
+        height: 911,
+      },
+    ],
+    visual: "daytrip",
+  },
+  {
+    slug: "fleetmove",
+    name: "FleetMove",
+    category: "Ride-Hailing & Fleet Platform",
+    type: "Built at Digitize LLC",
+    year: "2026",
+    technologies: [
+      "Laravel 12",
+      "Laravel Passport",
+      "RBAC",
+      "Laravel Reverb",
+      "WebSockets",
+      "Firebase Cloud Messaging",
+    ],
+    overview:
+      "FleetMove (fleet-move.com) is a live ride-hailing and fleet platform for Fivestar Galway Taxis, built on a 16-module Laravel 12 architecture.",
+    built: [
+      "Developed backend features for FleetMove (fleet-move.com), a live ride-hailing and fleet platform for Fivestar Galway Taxis, built on a 16-module Laravel 12 architecture.",
+      "Built REST APIs for the FleetMove customer and driver apps, securing endpoints with Laravel Passport authentication and role-based access control (RBAC) across 3 user roles.",
+      "Implemented real-time trip updates and chat using WebSockets (Laravel Reverb), and push notifications via Firebase Cloud Messaging (FCM).",
+    ],
+    highlights: [
+      "16-module Laravel 12 architecture",
+      "Laravel Passport authentication and RBAC across 3 user roles",
+      "Real-time trip updates and chat with Laravel Reverb and FCM",
+    ],
+    features: [
+      "REST APIs for the customer and driver apps",
+      "Laravel Passport authentication",
+      "Role-based access control across 3 user roles",
+      "Real-time trip updates and chat over WebSockets (Laravel Reverb)",
+      "Push notifications through Firebase Cloud Messaging (FCM)",
+    ],
+    challenges: [
+      "Securing customer and driver endpoints across 3 user roles.",
+      "Delivering real-time trip updates and chat.",
+      "Working within a 16-module Laravel 12 architecture.",
+    ],
+    diagrams: [
+      {
+        id: "api",
+        label: "API",
+        layers: [
+          step("apps", "Customer & driver apps", "The FleetMove customer and driver apps."),
+          step("rest", "REST APIs", "REST APIs built for the customer and driver apps."),
+          step("passport", "Laravel Passport", "Endpoints are secured with Laravel Passport authentication."),
+          step("rbac", "RBAC", "Role-based access control across 3 user roles.", "3 user roles"),
+          step(
+            "modules",
+            "16-module architecture",
+            "The backend is built on a 16-module Laravel 12 architecture.",
+            "Laravel 12"
+          ),
+        ],
+      },
+      realtimeDiagram,
+    ],
+    links: { live: "https://fleet-move.com" },
+    screenshots: [
+      {
+        src: "/projects/fleetmove/dashboard.webp",
+        alt: "FleetMove admin dashboard showing active customers, active drivers, earnings, parcel and ride totals, and zone-wise trip statistics.",
+        caption: "Admin dashboard",
+        width: 1902,
+        height: 911,
+      },
+      {
+        src: "/projects/fleetmove/booking.webp",
+        alt: "FleetMove manual booking form beside a live fleet view with a driver list and a map.",
+        caption: "Manual booking with live fleet view",
+        width: 1902,
+        height: 911,
+      },
+      {
+        src: "/projects/fleetmove/login.webp",
+        alt: "FleetMove admin sign-in screen with email and password fields.",
+        caption: "Admin sign-in",
+        width: 1902,
+        height: 911,
+      },
+    ],
+    screenshotNote: "Personal details, including names, phone numbers, and email addresses, are blurred.",
+    visual: "fleetmove",
   },
   {
     slug: "szabot",
@@ -167,7 +382,85 @@ export const projects: Project[] = [
       },
     ],
     links: { github: "https://github.com/WasiullahSahito" },
+    screenshots: [
+      {
+        src: "/projects/szabot/chat.webp",
+        alt: "SZABOT chat interface where a student asks when the DSA Exhibition is and the assistant replies with the date, time, venue, and organizer.",
+        caption: "Student chat",
+        width: 934,
+        height: 427,
+      },
+      {
+        src: "/projects/szabot/uploads.webp",
+        alt: "SZABOT admin uploads page with an Upload Timetable (PDF/Excel) control and a list of uploaded files.",
+        caption: "Admin timetable upload",
+        width: 969,
+        height: 442,
+      },
+      {
+        src: "/projects/szabot/dashboard.webp",
+        alt: "SZABOT admin dashboard showing counts of users, files uploaded, and chat sessions.",
+        caption: "Admin dashboard",
+        width: 969,
+        height: 439,
+      },
+    ],
     visual: "szabot",
+  },
+  {
+    slug: "oddco-studios",
+    name: "ODDCO Studios",
+    category: "Marketing Website",
+    type: "Freelance client project",
+    year: "2022–2026",
+    technologies: ["HTML5", "CSS3", "JavaScript", "PHP"],
+    overview:
+      "A responsive, SEO-optimized marketing website for ODDCO Studios, a 2D animation studio, delivered and maintained as a freelance web developer.",
+    built: [
+      "Delivered and maintained a responsive, SEO-optimized marketing website for a 2D animation studio using HTML5, CSS3, JavaScript, and PHP.",
+    ],
+    highlights: [
+      "Responsive, SEO-optimized marketing website",
+      "Built with HTML5, CSS3, JavaScript, and PHP",
+      "Delivered and maintained for a 2D animation studio",
+    ],
+    features: [
+      "Responsive layout",
+      "SEO-optimized",
+      "HTML5, CSS3, JavaScript, and PHP",
+      "Maintained after delivery",
+    ],
+    challenges: [
+      "Delivering a responsive site for a 2D animation studio.",
+      "Optimizing the site for search engines.",
+      "Maintaining the site after delivery.",
+    ],
+    diagrams: [],
+    links: { live: "https://oddcostudios.com" },
+    screenshots: [
+      {
+        src: "/projects/oddco-studios/home.webp",
+        alt: "ODDCO Studios home page with a full-screen hero, the headline Creative Excellence, and an Explore Our Work button.",
+        caption: "Home page",
+        width: 1902,
+        height: 911,
+      },
+      {
+        src: "/projects/oddco-studios/portfolio.webp",
+        alt: "ODDCO Studios 2D animation portfolio page with a grid of project cards.",
+        caption: "2D animation portfolio",
+        width: 1902,
+        height: 911,
+      },
+      {
+        src: "/projects/oddco-studios/about.webp",
+        alt: "ODDCO Studios about section with a character illustration and service tags for 2D animation, character design, and comic art.",
+        caption: "About section",
+        width: 1902,
+        height: 911,
+      },
+    ],
+    visual: "oddco",
   },
 ];
 

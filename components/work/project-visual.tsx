@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
-import type { Project } from "@/data/projects";
+import type { Project, Screenshot } from "@/data/projects";
 
 function Frame({ label, children }: { label: string; children: ReactNode }) {
   return (
@@ -96,6 +97,64 @@ function OnlyMetricVisual() {
   );
 }
 
+function DaytripVisual() {
+  return (
+    <Frame label="daytrip / booking">
+      <Block title="Booking flow">
+        <Chain
+          steps={[
+            "Customer",
+            "Booking",
+            "Server-side fare",
+            "Payment",
+            "Stripe / SumUp",
+            "Webhook",
+            "Booking status",
+          ]}
+          highlight="Server-side fare"
+        />
+      </Block>
+      <Block title="Stack">
+        <Chain steps={["React 19 SPA", "Laravel 13 REST API", "PostgreSQL", "Contabo VPS"]} />
+      </Block>
+      <Chips items={["Scheduled bookings", "Admin panel", "PHPUnit"]} />
+    </Frame>
+  );
+}
+
+function FleetMoveVisual() {
+  return (
+    <Frame label="fleetmove / platform">
+      <Block title="API">
+        <Chain
+          steps={[
+            "Customer & driver apps",
+            "REST APIs",
+            "Passport + RBAC",
+            "16-module Laravel 12",
+          ]}
+          highlight="16-module Laravel 12"
+        />
+      </Block>
+      <Block title="Real-time">
+        <Chain steps={["Driver", "Real-time event", "Laravel Reverb", "Customer app", "FCM push"]} />
+      </Block>
+      <Chips items={["3 user roles", "WebSockets", "Firebase Cloud Messaging"]} />
+    </Frame>
+  );
+}
+
+function OddcoVisual() {
+  return (
+    <Frame label="oddco-studios / website">
+      <Block title="Built with">
+        <Chain steps={["HTML5", "CSS3", "JavaScript", "PHP"]} />
+      </Block>
+      <Chips items={["Responsive", "SEO-optimized", "2D animation studio"]} />
+    </Frame>
+  );
+}
+
 function SzabotVisual() {
   return (
     <Frame label="szabot / pipeline">
@@ -120,10 +179,63 @@ function SzabotVisual() {
   );
 }
 
+export function ScreenshotFrame({
+  shot,
+  label,
+  sizes = "(min-width: 1280px) 1200px, 100vw",
+  priority = false,
+}: {
+  shot: Screenshot;
+  label: string;
+  sizes?: string;
+  priority?: boolean;
+}) {
+  return (
+    <div className="relative overflow-hidden rounded-xl border border-border-strong bg-background-elevated">
+      <div className="flex items-center gap-1.5 border-b border-white/5 px-4 py-3">
+        <span className="h-2 w-2 rounded-full bg-white/15" />
+        <span className="h-2 w-2 rounded-full bg-white/15" />
+        <span className="h-2 w-2 rounded-full bg-white/15" />
+        <span className="ml-3 truncate font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
+          {label}
+        </span>
+      </div>
+      <Image
+        src={shot.src}
+        alt={shot.alt}
+        width={shot.width}
+        height={shot.height}
+        sizes={sizes}
+        priority={priority}
+        className="h-auto w-full"
+      />
+    </div>
+  );
+}
+
 export function ProjectVisual({ project, className }: { project: Project; className?: string }) {
+  const shot = project.screenshots?.[0];
+  if (shot) {
+    return (
+      <div className={className}>
+        <ScreenshotFrame shot={shot} label={`${project.slug} / ${shot.caption.toLowerCase()}`} />
+      </div>
+    );
+  }
+
   return (
     <div className={cn("flex lg:min-h-[24rem]", className)} aria-hidden="true">
-      {project.visual === "szabot" ? <SzabotVisual /> : <OnlyMetricVisual />}
+      {project.visual === "szabot" ? (
+        <SzabotVisual />
+      ) : project.visual === "daytrip" ? (
+        <DaytripVisual />
+      ) : project.visual === "fleetmove" ? (
+        <FleetMoveVisual />
+      ) : project.visual === "oddco" ? (
+        <OddcoVisual />
+      ) : (
+        <OnlyMetricVisual />
+      )}
     </div>
   );
 }

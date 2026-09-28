@@ -6,7 +6,7 @@ import { SiGithub } from "react-icons/si";
 import type { ReactNode } from "react";
 import { getProjectBySlug, projects } from "@/data/projects";
 import { siteConfig } from "@/lib/site-config";
-import { ProjectVisual } from "@/components/work/project-visual";
+import { ProjectVisual, ScreenshotFrame } from "@/components/work/project-visual";
 import { ArchitectureExplorer } from "@/components/architecture/architecture-explorer";
 import { Reveal } from "@/components/animations/reveal";
 
@@ -22,7 +22,7 @@ function CaseSection({
   return (
     <section
       aria-labelledby={`section-${index}`}
-      className="grid gap-6 border-t border-border py-14 lg:grid-cols-[14rem_1fr] lg:gap-16 lg:py-20"
+      className="grid grid-cols-[minmax(0,1fr)] gap-6 border-t border-border py-14 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-16 lg:py-20"
     >
       <div className="flex items-baseline gap-4 lg:flex-col lg:gap-3">
         <span className="font-mono text-xs tracking-[0.3em] text-accent">
@@ -221,9 +221,11 @@ export default async function ProjectPage({
             <Lines items={project.challenges} />
           </CaseSection>
 
-          <CaseSection index={next()} title="Architecture">
-            <ArchitectureExplorer diagrams={project.diagrams} />
-          </CaseSection>
+          {project.diagrams.length ? (
+            <CaseSection index={next()} title="Architecture">
+              <ArchitectureExplorer diagrams={project.diagrams} />
+            </CaseSection>
+          ) : null}
 
           <CaseSection index={next()} title="Key features">
             <ul className="grid gap-3 sm:grid-cols-2">
@@ -251,10 +253,35 @@ export default async function ProjectPage({
           ) : null}
 
           <CaseSection index={next()} title="Interface">
-            <ProjectVisual project={project} />
-            <p className="mt-4 font-mono text-[11px] tracking-wide text-muted">
-              A schematic of the system described above, not a screenshot.
-            </p>
+            {project.screenshots?.length ? (
+              <>
+                <div className="flex flex-col gap-14">
+                  {project.screenshots.map((shot) => (
+                    <figure key={shot.src}>
+                      <ScreenshotFrame
+                        shot={shot}
+                        label={`${project.slug} / ${shot.caption.toLowerCase()}`}
+                        sizes="(min-width: 1280px) 900px, 100vw"
+                      />
+                      <figcaption className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+                        {shot.caption}
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
+                <p className="mt-10 font-mono text-[11px] tracking-wide text-muted">
+                  Screenshots of the application.
+                  {project.screenshotNote ? ` ${project.screenshotNote}` : ""}
+                </p>
+              </>
+            ) : (
+              <>
+                <ProjectVisual project={project} />
+                <p className="mt-4 font-mono text-[11px] tracking-wide text-muted">
+                  A schematic of the system described above, not a screenshot.
+                </p>
+              </>
+            )}
           </CaseSection>
         </div>
 
