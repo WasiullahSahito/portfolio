@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import { usePrefersReducedMotion } from "@/lib/hooks";
 
 const orbs = [
   { size: 200, color: "#a855f7", top: "8%", left: "6%", duration: 9 },
@@ -9,7 +10,7 @@ const orbs = [
 ];
 
 export function FloatingOrbs() {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = usePrefersReducedMotion();
 
   if (shouldReduceMotion) return null;
 

@@ -1,4 +1,4 @@
-const STEPS = ["LOADING 3D ENVIRONMENT", "LOADING CHARACTER", "LOADING INTERFACE"];
+const STEPS = ["INITIALIZING", "LOADING INTERFACE", "READY"];
 
 export function LoadingProgress({ progress }: { progress: number }) {
   const stepIndex = Math.min(STEPS.length - 1, Math.floor((progress / 100) * STEPS.length));
@@ -7,7 +7,7 @@ export function LoadingProgress({ progress }: { progress: number }) {
     <div className="flex w-64 flex-col gap-3 sm:w-80">
       <div className="h-px w-full overflow-hidden bg-white/10">
         <div
-          className="h-full bg-gradient-to-r from-glow-purple to-glow-pink transition-[width] duration-150 ease-linear"
+          className="h-full bg-accent transition-[width] duration-150 ease-linear"
           style={{ width: `${progress}%` }}
         />
       </div>

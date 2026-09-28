@@ -1,69 +1,40 @@
-import type { LucideIcon } from "lucide-react";
-import {
-  CreditCard,
-  Database,
-  Network,
-  Radio,
-  Server,
-  ShieldCheck,
-  Sparkles,
-} from "lucide-react";
-
 export type Capability = {
   title: string;
   description: string;
-  evidence: string;
-  icon: LucideIcon;
 };
 
+// The areas of work named in the professional summary.
 export const capabilities: Capability[] = [
   {
-    title: "API Architecture",
-    description:
-      "REST APIs designed to hold up under real client load — versioned resource groups, not ad-hoc endpoints.",
-    evidence: "16-module Laravel API (FleetMove) · 15 API resource groups (OnlyMetric)",
-    icon: Network,
+    title: "Laravel / PHP backends",
+    description: "Backend features on Laravel 12 and 13, with Passport authentication and RBAC.",
   },
   {
-    title: "Auth & Access Control",
-    description:
-      "Authentication and role-based authorization built server-side, so access rules can't be bypassed from the client.",
-    evidence: "Dual Passport + Sanctum auth with RBAC across roles (FleetMove)",
-    icon: ShieldCheck,
+    title: "REST APIs",
+    description: "Validated, well-defined APIs across Laravel, Node.js, and Express.js.",
   },
   {
-    title: "Real-time Systems",
-    description:
-      "WebSocket infrastructure and push notifications for state that has to stay live across multiple clients.",
-    evidence: "Laravel Reverb + FCM push notifications (FleetMove)",
-    icon: Radio,
+    title: "React applications",
+    description: "React 19 front ends that consume the APIs, including a full single-page application.",
   },
   {
-    title: "Payments & Billing",
-    description:
-      "Production payment integrations with signature verification, not just a client-side checkout widget.",
-    evidence: "Unified Stripe + SumUp cards (Daytrip) · 5-gateway abstraction (FleetMove)",
-    icon: CreditCard,
+    title: "Database architecture",
+    description: "PostgreSQL, MySQL, and MongoDB, with query optimization measured in results.",
   },
   {
-    title: "Database Architecture",
-    description:
-      "Relational schema design and query optimization measured in real performance gains, not guesses.",
-    evidence: "~28% faster APIs (Axoon Solutions) · ~25% faster reports (OnlyMetric)",
-    icon: Database,
+    title: "Real-time systems",
+    description: "WebSockets with Laravel Reverb, plus push notifications through FCM.",
   },
   {
-    title: "AI & LLM Integration",
-    description:
-      "Provider-agnostic AI architecture and retrieval pipelines built into production applications.",
-    evidence: "5-provider LLM layer for OCR (OnlyMetric) · RAG pipeline (SZABOT)",
-    icon: Sparkles,
+    title: "Payment integrations",
+    description: "Stripe with PaymentIntents and signed webhooks, and SumUp.",
   },
   {
-    title: "Cloud & Deployment",
-    description:
-      "Full deployment lifecycle ownership — provisioning, configuring, and operating production infrastructure.",
-    evidence: "Contabo VPS (Ubuntu, OpenLiteSpeed, PostgreSQL) · Laravel Cloud · Vercel",
-    icon: Server,
+    title: "AI / LLM integrations",
+    description: "LLM APIs, invoice OCR, and retrieval-augmented generation.",
+  },
+  {
+    title: "Production deployment",
+    description: "Linux VPS with OpenLiteSpeed and PostgreSQL, and managed platforms.",
   },
 ];

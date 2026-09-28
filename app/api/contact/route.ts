@@ -55,8 +55,31 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true });
   }
 
+  // Submission target is configured per deployment, e.g. a Formspree or
+  // Web3Forms endpoint. Without it there is nowhere to deliver the message.
+  const webhookUrl = process.env.CONTACT_WEBHOOK_URL;
+  if (!webhookUrl) {
+    return NextResponse.json(
+      { error: "The contact form is not configured. Please email me directly." },
+      { status: 503 }
+    );
+  }
+
   const { name, email, message } = parsed.data;
-  console.info("[contact] new message", { name, email, length: message.length });
+
+  try {
+    const response = await fetch(webhookUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({ name, email, message, source: "portfolio" }),
+    });
+    if (!response.ok) throw new Error(`Webhook responded ${response.status}`);
+  } catch {
+    return NextResponse.json(
+      { error: "Your message could not be delivered. Please email me directly." },
+      { status: 502 }
+    );
+  }
 
   return NextResponse.json({ success: true });
 }

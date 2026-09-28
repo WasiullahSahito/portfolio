@@ -1,71 +1,57 @@
-import { SectionHeading } from "@/components/ui/section-heading";
+import { siteConfig } from "@/lib/site-config";
 import { Reveal } from "@/components/animations/reveal";
-import { Bot, Database, Layers, ShieldCheck } from "lucide-react";
 
-const pillars = [
+const facts = [
+  { label: "Based in", text: siteConfig.location },
+  { label: "Since 2022", text: "Freelance web developer." },
   {
-    icon: Layers,
-    title: "Full-stack by default",
-    description:
-      "I move across the stack without friction — Laravel and Node.js on the backend, React and Next.js on the frontend, connected by REST APIs I design myself.",
+    label: "Live work",
+    text: "Built REST APIs and backend features for two live taxi platforms for Irish clients, deployed to production on a Linux VPS with PostgreSQL.",
   },
   {
-    icon: Database,
-    title: "Backend-first thinking",
-    description:
-      "My strongest work sits in the backend: relational data models, authentication, role-based access control, and APIs built to hold up under real usage.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Built to ship",
-    description:
-      "I care about applications that actually run in production — validated input, sane error states, and architecture that doesn't collapse when requirements change.",
-  },
-  {
-    icon: Bot,
-    title: "Trusted with real budgets",
-    description:
-      "From a promotion after a 3-month internship to a client relationship I've maintained since 2022, people keep me around because the systems I build keep running.",
+    label: "AI",
+    text: "Experienced in building AI-powered features with LLM APIs, OCR, and retrieval-augmented generation (RAG).",
   },
 ];
 
 export function About() {
   return (
-    <section id="about" className="relative overflow-hidden py-28 sm:py-36">
-      <div className="pointer-events-none absolute inset-0 bg-grid opacity-[0.04]" />
-      <div className="relative mx-auto max-w-6xl px-6">
-        <SectionHeading
-          eyebrow="About Studio"
-          title="A backend-first engineering practice built around one engineer"
-          description="I'm Wasiullah Sahito, a Software Engineer focused on backend and full-stack development. I design and build secure APIs, relational data models, role-based access systems, and real-time application workflows that power SaaS products in production."
-        />
+    <section id="about" className="relative overflow-hidden py-28 sm:py-40">
+      <div className="mx-auto max-w-7xl px-6 sm:px-10">
+        <p className="eyebrow">10 — About</p>
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {pillars.map((pillar, i) => (
-            <Reveal key={pillar.title} delay={i * 0.1}>
-              <div className="h-full rounded-lg border border-border bg-surface/60 p-6 transition-colors hover:border-border-strong">
-                <pillar.icon className="text-accent" size={22} />
-                <h3 className="mt-4 text-lg font-medium text-foreground">
-                  {pillar.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {pillar.description}
-                </p>
-              </div>
+        <div className="mt-10 grid gap-16 lg:grid-cols-[1.25fr_1fr] lg:gap-24">
+          <h2 className="display text-[clamp(2.25rem,7.4vw,6.5rem)] text-foreground">
+            Software
+            <br />
+            engineer.
+            <br />
+            <span className="text-foreground/35">Full stack developer.</span>
+          </h2>
+
+          <div>
+            <Reveal>
+              <p className="text-xl leading-snug tracking-tight text-foreground sm:text-2xl">
+                Software Engineer and Full Stack Developer specializing in Laravel and PHP backend
+                development, with experience across Node.js, Express.js, React.js, AI/LLM
+                integrations, and production deployment.
+              </p>
             </Reveal>
-          ))}
-        </div>
 
-        <Reveal delay={0.2} className="mt-12 max-w-3xl">
-          <p className="text-base leading-relaxed text-muted-foreground">
-            My approach to a new feature starts with the data: what needs to
-            be stored, who is allowed to touch it, and how it moves through
-            an API before it ever reaches a screen. That discipline comes
-            from building live systems like FleetMove and Daytrip — real
-            ride-hailing and booking platforms in production for Irish
-            clients, not portfolio demos.
-          </p>
-        </Reveal>
+            <dl className="mt-12 border-t border-border">
+              {facts.map((fact, i) => (
+                <Reveal key={fact.label} delay={i * 0.05}>
+                  <div className="grid gap-2 border-b border-border py-5 sm:grid-cols-[6.5rem_1fr] sm:gap-6">
+                    <dt className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent sm:pt-0.5">
+                      {fact.label}
+                    </dt>
+                    <dd className="text-sm leading-relaxed text-muted-foreground">{fact.text}</dd>
+                  </div>
+                </Reveal>
+              ))}
+            </dl>
+          </div>
+        </div>
       </div>
     </section>
   );

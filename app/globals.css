@@ -16,7 +16,7 @@
   --accent-violet: #5b9dff;
   --accent-foreground: #0c0518;
   --glow-purple: #a855f7;
-  --glow-pink: #d946a8;
+  --glow-pink: #7c6cf0;
   --radius: 0.875rem;
   --radius-sm: 0.5rem;
   --radius-lg: 1.5rem;
@@ -135,8 +135,52 @@ body {
 
 .cinematic-glow {
   background:
-    radial-gradient(45% 55% at 22% 20%, color-mix(in srgb, var(--glow-purple) 22%, transparent), transparent 70%),
-    radial-gradient(45% 55% at 82% 75%, color-mix(in srgb, var(--glow-pink) 16%, transparent), transparent 70%);
+    radial-gradient(45% 55% at 22% 20%, color-mix(in srgb, var(--glow-purple) 16%, transparent), transparent 70%),
+    radial-gradient(45% 55% at 82% 75%, color-mix(in srgb, var(--glow-pink) 10%, transparent), transparent 70%);
+}
+
+/* Editorial display type: tight, uppercase, oversized. */
+.display {
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 0.88;
+  text-transform: uppercase;
+}
+
+.eyebrow {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+@keyframes flow-down {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(400%);
+  }
+}
+
+@keyframes flow-line {
+  0% {
+    top: -20%;
+  }
+  100% {
+    top: 100%;
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 .text-outline {

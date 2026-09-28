@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
 import { motion } from "motion/react";
 import { siteConfig } from "@/lib/site-config";
 import { useActiveSection, useAnchorScroll } from "@/lib/hooks";
@@ -15,9 +14,9 @@ const sectionIds = siteConfig.navLinks.map((link) => link.href.replace("#", ""))
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const activeId = useActiveSection(sectionIds);
-  const scrollTo = useAnchorScroll();
   const pathname = usePathname();
+  const activeId = useActiveSection(sectionIds, pathname);
+  const scrollTo = useAnchorScroll();
   const isHome = pathname === "/";
 
   useEffect(() => {
@@ -36,7 +35,7 @@ export function Navbar() {
 
   return (
     <motion.header
-      initial={{ y: -32, opacity: 0 }}
+      initial={{ y: -24, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
       className={cn(
@@ -44,15 +43,15 @@ export function Navbar() {
         menuOpen
           ? "h-dvh overflow-y-auto bg-background"
           : scrolled
-            ? "glass border-b border-border"
+            ? "border-b border-border bg-background/85 backdrop-blur-xl"
             : "border-b border-transparent"
       )}
     >
       <nav
         aria-label="Primary"
         className={cn(
-          "mx-auto flex max-w-7xl items-center justify-between px-6 transition-[padding] duration-300",
-          scrolled || menuOpen ? "py-4" : "py-6"
+          "mx-auto flex max-w-7xl items-center justify-between px-6 transition-[padding] duration-300 sm:px-10",
+          scrolled || menuOpen ? "py-3.5" : "py-6"
         )}
       >
         <Link
@@ -62,24 +61,27 @@ export function Navbar() {
             e.preventDefault();
             scrollTo("#home");
           }}
-          className="font-mono text-sm font-semibold tracking-[0.3em] text-foreground"
+          aria-label={`${siteConfig.name} — home`}
+          className={cn(
+            "flex font-mono font-semibold uppercase text-foreground",
+            scrolled || menuOpen
+              ? "flex-row gap-2 text-[11px] leading-none tracking-[0.25em]"
+              : "flex-col text-xs leading-[1.35] tracking-[0.3em]"
+          )}
         >
-          WS<span className="text-glow-purple">.</span>
+          <span>Wasiullah</span>
+          <span>Sahito</span>
         </Link>
 
-        {siteConfig.email ? (
-          <a
-            href={`mailto:${siteConfig.email}`}
-            className="hidden font-mono text-xs tracking-widest text-muted-foreground transition-colors hover:text-foreground md:block"
-          >
-            {siteConfig.email}
-          </a>
-        ) : null}
+        <p className="hidden items-center gap-2.5 font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground lg:flex">
+          <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+          {siteConfig.location}
+        </p>
 
         <ul className="hidden items-center gap-9 md:flex">
           {siteConfig.navLinks.map((link) => {
             const id = link.href.replace("#", "");
-            const isActive = activeId === id;
+            const isActive = isHome && activeId === id;
             return (
               <li key={link.href}>
                 <Link
@@ -99,7 +101,7 @@ export function Navbar() {
                   {isActive ? (
                     <motion.span
                       layoutId="nav-active-indicator"
-                      className="absolute -bottom-1.5 left-0 h-px w-full bg-glow-purple"
+                      className="absolute -bottom-1.5 left-0 h-px w-full bg-accent"
                     />
                   ) : null}
                 </Link>
@@ -110,12 +112,23 @@ export function Navbar() {
 
         <button
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full text-foreground md:hidden"
+          className="relative inline-flex h-10 w-10 items-center justify-center text-foreground md:hidden"
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((open) => !open)}
         >
-          {menuOpen ? <X size={22} /> : <Menu size={22} />}
+          <span
+            className={cn(
+              "absolute h-px w-6 bg-current transition-transform duration-300",
+              menuOpen ? "rotate-45" : "-translate-y-1.5"
+            )}
+          />
+          <span
+            className={cn(
+              "absolute h-px w-6 bg-current transition-transform duration-300",
+              menuOpen ? "-rotate-45" : "translate-y-1.5"
+            )}
+          />
         </button>
       </nav>
 

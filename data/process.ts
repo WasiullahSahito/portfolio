@@ -1,47 +1,47 @@
-import type { LucideIcon } from "lucide-react";
-import { Database, GitBranch, Rocket, ShieldCheck, TrendingUp } from "lucide-react";
-
 export type ProcessStep = {
   title: string;
   description: string;
   evidence: string;
-  icon: LucideIcon;
 };
 
 export const processSteps: ProcessStep[] = [
   {
-    title: "Architect first",
+    title: "Understand",
     description:
-      "Data model, API contracts, and access control get designed before feature code does — not discovered halfway through a sprint.",
-    evidence: "16-module domain split (FleetMove) · server-authoritative fare formula (Daytrip)",
-    icon: Database,
+      "Start with who uses the system and what each of them is allowed to do, before any schema or screen exists.",
+    evidence: "RBAC across 3 user roles (FleetMove) · customer, driver, and admin workflows",
   },
   {
-    title: "Build with tests",
+    title: "Design",
     description:
-      "Booking and payment-critical paths get PHPUnit coverage, not manual spot-checks, before they ship.",
-    evidence: "PHPUnit across booking & payment flows (Daytrip, OnlyMetric)",
-    icon: GitBranch,
+      "Define the API contracts, request validation, and error handling up front, alongside the database design.",
+    evidence: "Defined API contracts, validation, and error handling (Axoon Solutions)",
   },
   {
-    title: "Validate every boundary",
+    title: "Architect",
     description:
-      "Client input, webhook signatures, and AI output all get verified server-side — nothing crossing a trust boundary is taken on faith.",
-    evidence: "Signed Stripe webhooks, re-verified SumUp setups, human-reviewed AI output (OnlyMetric)",
-    icon: ShieldCheck,
+      "Split the backend into clear domains so features can grow without tangling: modules, resource groups, and a provider layer for external AI services.",
+    evidence:
+      "16-module Laravel 12 architecture (FleetMove) · 15 API resource groups and a 5-provider LLM layer (OnlyMetric)",
   },
   {
-    title: "Own deployment",
+    title: "Build",
     description:
-      "Shipping means the full lifecycle — provisioning and hardening a VPS or configuring a managed platform, not handing off a build artifact.",
-    evidence: "Contabo VPS, Ubuntu, OpenLiteSpeed (Daytrip) · Laravel Cloud (OnlyMetric)",
-    icon: Rocket,
+      "Secure endpoints with authentication and role-based access control, integrate payments and real-time channels, and back critical paths with tests.",
+    evidence:
+      "Laravel Passport + RBAC · Stripe and SumUp · Laravel Reverb WebSockets · PHPUnit (Daytrip)",
   },
   {
-    title: "Measure, then iterate",
+    title: "Optimize",
     description:
-      "Performance work is driven by what's actually slow, and the improvement gets measured, not assumed.",
-    evidence: "~28% faster APIs (Axoon) · ~25% faster reports (OnlyMetric)",
-    icon: TrendingUp,
+      "Find slow queries and redundant database calls, then fix them.",
+    evidence:
+      "~28% API response-time reduction (Axoon Solutions) · ~25% report generation-time reduction (OnlyMetric)",
+  },
+  {
+    title: "Deploy",
+    description:
+      "Ship to production infrastructure, from a self-managed Linux VPS to a managed platform.",
+    evidence: "Contabo VPS, Ubuntu, OpenLiteSpeed, PostgreSQL (Daytrip) · Laravel Cloud (OnlyMetric)",
   },
 ];

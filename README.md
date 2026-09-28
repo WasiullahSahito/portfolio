@@ -23,14 +23,15 @@ This portfolio showcases:
 - React 19
 - TypeScript
 - Tailwind CSS
-- GSAP / Framer Motion style animations
+- Motion (Framer Motion) + Lenis smooth scrolling
 - Lucide + React Icons
-- Netlify deployment
+- Vercel-compatible deployment
 
 ## Features
 
 - Modern landing page and hero section
-- About, experience, and skills sections
+- Editorial hero, architecture lab, engineering process, and technical landscape
+- About, experience, and lab sections
 - Project portfolio with detailed case studies
 - Resume download support
 - Contact form integration
@@ -43,21 +44,28 @@ This portfolio showcases:
 .
 ├── app/
 │   ├── api/
-│   ├── projects/
+│   ├── work/[slug]/
+│   ├── experience/
 │   ├── globals.css
 │   ├── layout.tsx
 │   └── page.tsx
 ├── components/
-│   ├── 3d/
 │   ├── animations/
 │   ├── hero/
 │   ├── navigation/
 │   ├── sections/
+│   ├── work/
 │   └── ui/
 ├── data/
+│   ├── architecture.ts
+│   ├── education.ts
 │   ├── experience.ts
+│   ├── lab.ts
+│   ├── metrics.ts
+│   ├── process.ts
 │   ├── projects.ts
-│   └── skills.ts
+│   ├── skills.ts
+│   └── technology.ts
 ├── lib/
 │   ├── hooks.ts
 │   ├── site-config.ts

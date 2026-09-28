@@ -1,94 +1,66 @@
 "use client";
 
 import { useRef } from "react";
-import { GraduationCap } from "lucide-react";
-import { education, experience } from "@/data/experience";
-import { SectionHeading } from "@/components/ui/section-heading";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { experience, formatPeriod } from "@/data/experience";
 import { Reveal } from "@/components/animations/reveal";
 import { ScrollProgressLine } from "@/components/animations/scroll-progress-line";
-
-function formatPeriod(start: string, end: string) {
-  const format = (value: string) =>
-    new Date(`${value}-01`).toLocaleDateString("en-US", {
-      month: "short",
-      year: "numeric",
-    });
-  return `${format(start)} — ${format(end)}`;
-}
 
 export function Experience() {
   const timelineRef = useRef<HTMLOListElement>(null);
 
   return (
-    <section id="experience" className="relative overflow-hidden py-28 sm:py-36">
-      <div className="pointer-events-none absolute inset-0 bg-grid opacity-[0.04]" />
-      <div className="relative mx-auto max-w-6xl px-6">
-        <SectionHeading
-          eyebrow="Experience"
-          title="Career timeline"
-          description="Where I've put full-stack development into practice."
-        />
+    <section id="experience" className="relative overflow-hidden py-28 sm:py-40">
+      <div className="mx-auto max-w-7xl px-6 sm:px-10">
+        <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
+          <div>
+            <p className="eyebrow">06 — Experience</p>
+            <h2 className="display mt-6 text-[clamp(2.5rem,8vw,6.5rem)] text-foreground">
+              Experience
+            </h2>
+          </div>
+          <Link
+            href="/experience"
+            className="group inline-flex min-h-11 items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-foreground transition-colors hover:text-accent"
+          >
+            <span className="border-b border-border-strong pb-1 transition-colors group-hover:border-accent">
+              Full experience
+            </span>
+            <ArrowUpRight
+              size={16}
+              className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            />
+          </Link>
+        </div>
 
         <ol
           ref={timelineRef}
-          id="experience-timeline"
-          className="relative mt-16 space-y-10 border-l border-border pl-8"
+          className="relative mt-16 space-y-14 border-l border-border pl-8 sm:mt-24 sm:pl-12"
         >
           <ScrollProgressLine containerRef={timelineRef} />
           {experience.map((entry, i) => (
-            <Reveal key={entry.company} as="li" delay={i * 0.1}>
-              <span className="absolute -left-[7px] mt-1.5 h-3 w-3 rounded-full border-2 border-accent bg-background" />
-              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                <h3 className="text-xl font-medium text-foreground">
-                  {entry.role}
-                </h3>
-                <time className="font-mono text-xs text-muted-foreground">
-                  {formatPeriod(entry.start, entry.end)}
-                </time>
+            <Reveal key={entry.id} as="li" delay={i * 0.05}>
+              <span className="absolute -left-1.75 mt-3 h-3 w-3 rounded-full border-2 border-accent bg-background" />
+              <div className="grid gap-x-12 gap-y-4 lg:grid-cols-[1fr_1.4fr]">
+                <div>
+                  <time className="font-mono text-xs tracking-[0.2em] text-muted-foreground">
+                    {formatPeriod(entry.start, entry.end)}
+                  </time>
+                  <h3 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+                    {entry.company}
+                  </h3>
+                  <p className="mt-2 font-mono text-xs uppercase tracking-[0.2em] text-accent">
+                    {entry.role}
+                  </p>
+                </div>
+                <p className="max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg lg:pt-9">
+                  {entry.summary}
+                </p>
               </div>
-              <p className="mt-1 text-sm font-medium text-accent">
-                {entry.company}
-              </p>
-              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-                {entry.summary}
-              </p>
-              <ul className="mt-4 grid gap-2 sm:grid-cols-2">
-                {entry.responsibilities.map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-start gap-2 text-sm text-muted-foreground"
-                  >
-                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
             </Reveal>
           ))}
         </ol>
-
-        <div className="mt-16 border-t border-border pt-10">
-          <h3 className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
-            Education
-          </h3>
-          <div className="mt-6 flex flex-col gap-6">
-            {education.map((entry) => (
-              <Reveal key={entry.institution}>
-                <div className="flex items-start gap-4">
-                  <GraduationCap className="mt-1 shrink-0 text-accent" size={20} />
-                  <div>
-                    <p className="text-base font-medium text-foreground">
-                      {entry.degree}
-                    </p>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      {entry.institution}, {entry.location} &middot; {entry.period}
-                    </p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );

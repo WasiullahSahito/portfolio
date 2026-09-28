@@ -1,36 +1,49 @@
-import { SiGithub } from "react-icons/si";
 import { siteConfig } from "@/lib/site-config";
-import { FooterNav } from "@/components/footer-nav";
+
+const footerLinks = [
+  { href: siteConfig.github, label: "GitHub" },
+  { href: siteConfig.linkedin, label: "LinkedIn" },
+  { href: `mailto:${siteConfig.email}`, label: "Email" },
+];
 
 export function Footer() {
-  const year = new Date().getFullYear();
-
   return (
     <footer className="border-t border-border">
-      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-6 py-12 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mx-auto flex max-w-7xl flex-col gap-10 px-6 py-14 sm:px-10 md:flex-row md:items-end md:justify-between">
         <div>
-          <p className="font-mono text-sm font-semibold text-foreground">
+          <p className="text-3xl font-semibold uppercase leading-none tracking-[-0.04em] text-foreground sm:text-4xl">
             {siteConfig.name}
           </p>
-          <p className="mt-1 text-sm text-muted-foreground">{siteConfig.role}</p>
+          <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
+            {siteConfig.title}
+          </p>
+          <p className="mt-4 font-mono text-xs uppercase tracking-[0.2em] text-muted">
+            {siteConfig.location}
+          </p>
         </div>
 
-        <FooterNav />
-
-        <a
-          href={siteConfig.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="GitHub profile"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border-strong text-muted-foreground transition-colors hover:border-accent hover:text-accent"
-        >
-          <SiGithub size={18} />
-        </a>
+        <nav aria-label="Footer">
+          <ul className="flex flex-wrap gap-x-8 gap-y-2">
+            {footerLinks.map((link) => (
+              <li key={link.label}>
+                <a
+                  href={link.href}
+                  {...(link.href.startsWith("http")
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                  className="inline-flex min-h-11 items-center font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-accent"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
 
-      <div className="border-t border-border px-6 py-6">
-        <p className="mx-auto max-w-6xl text-center text-xs text-muted sm:text-left">
-          © {year} {siteConfig.name}. All rights reserved.
+      <div className="border-t border-border px-6 py-6 sm:px-10">
+        <p className="mx-auto max-w-7xl font-mono text-[11px] tracking-widest text-muted">
+          © 2026 {siteConfig.name}
         </p>
       </div>
     </footer>

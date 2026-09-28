@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { siteConfig } from "@/lib/site-config";
 import { Navbar } from "@/components/navigation/navbar";
-import { SocialRail } from "@/components/navigation/social-rail";
 import { ResumeButton } from "@/components/navigation/resume-button";
 import { Footer } from "@/components/footer";
 import { CustomCursor } from "@/components/animations/custom-cursor";
+import { ScrollProgress } from "@/components/animations/scroll-progress";
 import { SmoothScrollProvider } from "@/components/animations/smooth-scroll-provider";
 import { LoadingProvider } from "@/components/loading/loading-provider";
 import "./globals.css";
@@ -32,13 +32,13 @@ export const metadata: Metadata = {
     "Software Engineer",
     "Full Stack Developer",
     "Laravel Developer",
+    "PHP Developer",
+    "Python Developer",
     "React Developer",
     "Node.js Developer",
-    "Python Developer",
     "AI Integrations",
     "RAG",
     "REST APIs",
-    "SaaS Development",
   ],
   authors: [{ name: siteConfig.name, url: siteConfig.url }],
   creator: siteConfig.name,
@@ -90,8 +90,6 @@ const personJsonLd = {
     "Next.js",
     "Node.js",
     "Express.js",
-    "FastAPI",
-    "Flask",
     "REST APIs",
     "WebSockets",
     "RBAC",
@@ -103,8 +101,6 @@ const personJsonLd = {
     "Anthropic Claude API",
     "Google Gemini API",
     "Retrieval-Augmented Generation",
-    "Docker",
-    "AWS",
   ],
 };
 
@@ -140,8 +136,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SmoothScrollProvider>
           <LoadingProvider>
             <CustomCursor />
+            <ScrollProgress />
             <Navbar />
-            <SocialRail />
             <ResumeButton />
             <main id="main-content">{children}</main>
             <Footer />

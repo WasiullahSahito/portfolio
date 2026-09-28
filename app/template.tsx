@@ -1,13 +1,14 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import { usePrefersReducedMotion } from "@/lib/hooks";
 import type { ReactNode } from "react";
 
 export default function Template({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const shouldReduceMotion = useReducedMotion();
-  const isCaseStudy = pathname?.startsWith("/projects/");
+  const shouldReduceMotion = usePrefersReducedMotion();
+  const isCaseStudy = pathname?.startsWith("/work/");
 
   if (shouldReduceMotion) return <>{children}</>;
 

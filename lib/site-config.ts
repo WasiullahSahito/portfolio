@@ -1,32 +1,28 @@
 export const siteConfig = {
   name: "Wasiullah Sahito",
   role: "Software Engineer",
-  roleLong: "Software Engineer | Backend & Full Stack Development",
-  location: "Karachi, Sindh, Pakistan",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://devwasiullah.netlify.app",
+  title: "Software Engineer | Full Stack Developer (Laravel, PHP, React)",
+  location: "Karachi, Pakistan",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://wasiullahsahito.vercel.app",
   github: "https://github.com/WasiullahSahito",
+  githubLabel: "github.com/WasiullahSahito",
   email: "wasi1237585@gmail.com",
   phone: "+92 333 4698244",
-  // Not provided yet — kept undefined rather than fabricated. Set these env
-  // vars to surface the corresponding links once available.
-  linkedin: process.env.NEXT_PUBLIC_LINKEDIN_URL || undefined,
+  linkedin:
+    process.env.NEXT_PUBLIC_LINKEDIN_URL || "https://www.linkedin.com/in/wasiullah-sahito-bba35a224",
+  linkedinLabel: "linkedin.com/in/wasiullah-sahito-bba35a224",
   x: process.env.NEXT_PUBLIC_X_URL || undefined,
   resumeUrl: process.env.NEXT_PUBLIC_RESUME_URL || "/wasiullah-sahito-resume.pdf",
-  tagline: "I build production-ready software systems — from architecture to deployment.",
-  heroHeadline: "Building digital products that scale.",
-  heroSupport:
-    "I design and engineer production-ready software systems, from backend architecture and APIs to modern interfaces and AI-powered applications.",
-  availability: "Available to Work",
-  positioning:
-    "Backend-focused Full Stack Developer specializing in Laravel, Node.js, React.js, RESTful API design, real-time systems, and scalable SaaS architecture.",
+  statement: "Building backend systems, full-stack applications, and AI-powered products.",
+  summary:
+    "Software Engineer and Full Stack Developer specializing in Laravel and PHP backend development, with professional experience in Node.js, Express.js, and React.js. Built REST APIs and backend features for two live taxi platforms for Irish clients, including Laravel Passport authentication, role-based access control (RBAC), real-time WebSockets, and Stripe and SumUp payment integrations. Deployed to production on a Linux VPS with PostgreSQL. Experienced in building AI-powered features with LLM APIs, OCR, and retrieval-augmented generation (RAG). Freelance web developer since 2022.",
   description:
-    "Portfolio of Wasiullah Sahito, a Full Stack Software Engineer specializing in Laravel, React, Node.js, Python, AI integrations, APIs, and production-ready applications.",
+    "Wasiullah Sahito is a Software Engineer and Full Stack Developer in Karachi, Pakistan, specializing in Laravel and PHP backend development, React, REST APIs, real-time systems, payment integrations, and AI/LLM features.",
   navLinks: [
-    { href: "#about", label: "About" },
-    { href: "#skills", label: "Skills" },
-    { href: "#ai", label: "AI" },
-    { href: "#projects", label: "Work" },
+    { href: "#work", label: "Work" },
     { href: "#experience", label: "Experience" },
+    { href: "#lab", label: "Lab" },
+    { href: "#about", label: "About" },
     { href: "#contact", label: "Contact" },
   ],
 } as const;

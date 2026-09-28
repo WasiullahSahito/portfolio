@@ -1,10 +1,11 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll } from "motion/react";
+import { motion, useScroll } from "motion/react";
+import { usePrefersReducedMotion } from "@/lib/hooks";
 import type { RefObject } from "react";
 
 export function ScrollProgressLine({ containerRef }: { containerRef: RefObject<HTMLElement | null> }) {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = usePrefersReducedMotion();
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start 75%", "end 75%"],

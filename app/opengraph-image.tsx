@@ -30,7 +30,7 @@ export default async function Image() {
             fontFamily: "monospace",
           }}
         >
-          {siteConfig.roleLong}
+          {siteConfig.role}
         </div>
         <div
           style={{
@@ -52,7 +52,7 @@ export default async function Image() {
             maxWidth: 900,
           }}
         >
-          Laravel · React · Node.js · Python · AI Integrations · APIs
+          Full Stack Developer · Laravel · PHP · React
         </div>
       </div>
     ),

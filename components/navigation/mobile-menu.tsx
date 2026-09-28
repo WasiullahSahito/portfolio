@@ -37,9 +37,15 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
           transition={{ duration: 0.2, ease: "easeInOut" }}
           className="border-t border-border md:hidden"
         >
-          <ul className="flex flex-col gap-1 px-6 py-6">
-            {siteConfig.navLinks.map((link) => (
-              <li key={link.href}>
+          <ul className="flex flex-col px-6 py-8">
+            {siteConfig.navLinks.map((link, i) => (
+              <motion.li
+                key={link.href}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: 0.05 + i * 0.06, ease: [0.16, 1, 0.3, 1] }}
+                className="border-b border-border"
+              >
                 <Link
                   href={isHome ? link.href : `/${link.href}`}
                   scroll={false}
@@ -49,16 +55,19 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
                     e.preventDefault();
                     scrollTo(link.href);
                   }}
-                  className="block rounded-lg px-3 py-4 text-lg font-medium text-foreground/90 hover:bg-surface-hover"
+                  className="flex min-h-16 items-baseline gap-4 py-5 text-4xl font-semibold uppercase tracking-tight text-foreground"
                 >
+                  <span className="font-mono text-xs tracking-widest text-muted">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                   {link.label}
                 </Link>
-              </li>
+              </motion.li>
             ))}
           </ul>
 
-          <div className="flex items-center justify-between border-t border-border px-6 py-5">
-            <ul className="flex items-center gap-4">
+          <div className="flex items-center justify-between px-6 py-5">
+            <ul className="flex items-center gap-2">
               {socialLinks.map(({ href, icon: Icon, label }) => (
                 <li key={label}>
                   <a
@@ -66,9 +75,9 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    className="flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground hover:text-glow-purple"
+                    className="flex h-11 w-11 items-center justify-center rounded-full text-muted-foreground hover:text-accent"
                   >
-                    <Icon size={17} />
+                    <Icon size={18} />
                   </a>
                 </li>
               ))}
@@ -80,7 +89,7 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
                 target="_blank"
                 rel="noopener noreferrer"
                 download="Wasiullah Sahito - Resume.pdf"
-                className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-foreground/90"
+                className="flex min-h-11 items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-foreground/90"
               >
                 <FileText size={14} />
                 Resume

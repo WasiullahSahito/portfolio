@@ -1,76 +1,80 @@
-import { Mail, MapPin, Phone } from "lucide-react";
+import { ArrowRight, Mail, Phone } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 import { FaLinkedin } from "react-icons/fa6";
 import { siteConfig } from "@/lib/site-config";
-import { SectionHeading } from "@/components/ui/section-heading";
 import { ContactForm } from "@/components/sections/contact-form";
 import { Reveal } from "@/components/animations/reveal";
+import { MagneticButton } from "@/components/animations/magnetic-button";
 import { FloatingOrbs } from "@/components/contact/floating-orbs";
 
+const links = [
+  { href: `mailto:${siteConfig.email}`, label: siteConfig.email, icon: Mail, external: false },
+  {
+    href: `tel:${siteConfig.phone.replace(/\s+/g, "")}`,
+    label: siteConfig.phone,
+    icon: Phone,
+    external: false,
+  },
+  { href: siteConfig.linkedin, label: siteConfig.linkedinLabel, icon: FaLinkedin, external: true },
+  { href: siteConfig.github, label: siteConfig.githubLabel, icon: SiGithub, external: true },
+];
+
 export function Contact() {
+  // The form only renders when a submission target is configured for this deployment.
+  const formEnabled = Boolean(process.env.CONTACT_WEBHOOK_URL);
+
   return (
-    <section id="contact" className="relative overflow-hidden py-28 sm:py-36">
-      <div className="pointer-events-none absolute inset-0 cinematic-glow opacity-60" />
+    <section id="contact" className="relative overflow-hidden py-28 sm:py-40">
+      <div className="pointer-events-none absolute inset-0 cinematic-glow opacity-50" aria-hidden="true" />
       <FloatingOrbs />
-      <div className="relative mx-auto max-w-6xl px-6">
-        <div className="grid gap-16 lg:grid-cols-[1fr_1.2fr]">
-          <div>
-            <SectionHeading
-              eyebrow="Contact"
-              title="Let's build something worth shipping"
-              description="Have a project, a role, or an idea worth discussing? Send a message and I'll respond directly."
-            />
+      <div className="relative mx-auto max-w-7xl px-6 sm:px-10">
+        <p className="eyebrow">11 — Contact</p>
 
-            <div className="mt-10 flex flex-col gap-4">
+        <h2 className="display mt-10 text-[clamp(2.5rem,9.5vw,8.5rem)] text-foreground">
+          Let&apos;s build
+          <br />
+          something.
+        </h2>
+        <p className="mt-8 text-xl tracking-tight text-muted-foreground sm:text-2xl">
+          Have a product, system, or technical challenge in mind?
+        </p>
+
+        <div className="mt-12">
+          <MagneticButton>
+            <a
+              href={`mailto:${siteConfig.email}`}
+              className="group inline-flex h-14 items-center gap-3 rounded-full bg-foreground px-8 font-mono text-xs uppercase tracking-[0.2em] text-background transition-colors hover:bg-accent hover:text-white"
+            >
+              Start a conversation
+              <ArrowRight
+                size={16}
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              />
+            </a>
+          </MagneticButton>
+        </div>
+
+        <ul className="mt-14 grid gap-x-10 border-t border-border sm:grid-cols-2">
+          {links.map(({ href, label, icon: Icon, external }) => (
+            <li key={label} className="border-b border-border">
               <a
-                href={siteConfig.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 text-sm text-muted-foreground transition-colors hover:text-accent"
+                href={href}
+                {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                className="group flex min-h-14 items-center gap-4 py-4 text-sm text-muted-foreground transition-colors hover:text-accent sm:text-base"
               >
-                <SiGithub size={18} />
-                github.com/WasiullahSahito
+                <Icon size={18} className="shrink-0" />
+                <span className="min-w-0 break-words">{label}</span>
               </a>
-              {siteConfig.linkedin ? (
-                <a
-                  href={siteConfig.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-sm text-muted-foreground transition-colors hover:text-accent"
-                >
-                  <FaLinkedin size={18} />
-                  LinkedIn
-                </a>
-              ) : null}
-              {siteConfig.email ? (
-                <a
-                  href={`mailto:${siteConfig.email}`}
-                  className="flex items-center gap-3 text-sm text-muted-foreground transition-colors hover:text-accent"
-                >
-                  <Mail size={18} />
-                  {siteConfig.email}
-                </a>
-              ) : null}
-              {siteConfig.phone ? (
-                <a
-                  href={`tel:${siteConfig.phone.replace(/\s+/g, "")}`}
-                  className="flex items-center gap-3 text-sm text-muted-foreground transition-colors hover:text-accent"
-                >
-                  <Phone size={18} />
-                  {siteConfig.phone}
-                </a>
-              ) : null}
-              <p className="flex items-center gap-3 text-sm text-muted-foreground">
-                <MapPin size={18} />
-                {siteConfig.location}
-              </p>
-            </div>
-          </div>
+            </li>
+          ))}
+        </ul>
 
-          <Reveal>
+        {formEnabled ? (
+          <Reveal className="mt-20 max-w-2xl">
+            <p className="eyebrow mb-8">Or send a message</p>
             <ContactForm />
           </Reveal>
-        </div>
+        ) : null}
       </div>
     </section>
   );

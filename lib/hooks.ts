@@ -48,32 +48,41 @@ export function useAnchorScroll() {
   );
 }
 
-export function useActiveSection(ids: string[]) {
-  const [activeId, setActiveId] = useState<string>(ids[0] ?? "");
+/** Returns the id of the section crossing the reading line, or "" when none does. */
+export function useActiveSection(ids: string[], routeKey?: string) {
+  const [activeId, setActiveId] = useState<string>("");
 
   useEffect(() => {
-    const elements = ids
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => el !== null);
+    let frame = 0;
 
-    if (elements.length === 0) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-
-        if (visible[0]) {
-          setActiveId(visible[0].target.id);
+    // Sections are looked up on every frame rather than held by reference,
+    // because React can replace those nodes after this hook first runs.
+    const update = () => {
+      frame = 0;
+      const readingLine = window.innerHeight * 0.4;
+      let current = "";
+      for (const id of ids) {
+        const rect = document.getElementById(id)?.getBoundingClientRect();
+        if (rect && rect.top <= readingLine && rect.bottom > readingLine) {
+          current = id;
+          break;
         }
-      },
-      { rootMargin: "-35% 0px -55% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] }
-    );
+      }
+      setActiveId(current);
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
 
-    elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, [ids]);
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, [ids, routeKey]);
 
   return activeId;
 }

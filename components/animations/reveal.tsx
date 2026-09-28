@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "motion/react";
+import { motion, type Variants } from "motion/react";
+import { usePrefersReducedMotion } from "@/lib/hooks";
 import type { ReactNode } from "react";
 
 const variants: Variants = {
@@ -23,7 +24,7 @@ export function Reveal({
   className?: string;
   as?: "div" | "li";
 }) {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = usePrefersReducedMotion();
   const Component = as === "li" ? motion.li : motion.div;
 
   if (shouldReduceMotion) {
@@ -54,7 +55,7 @@ export function RevealGroup({
   className?: string;
   stagger?: number;
 }) {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = usePrefersReducedMotion();
 
   if (shouldReduceMotion) {
     return <div className={className}>{children}</div>;
@@ -85,7 +86,7 @@ export function RevealItem({
   className?: string;
   as?: "div" | "li";
 }) {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = usePrefersReducedMotion();
   const Component = as === "li" ? motion.li : motion.div;
 
   if (shouldReduceMotion) {

@@ -3,20 +3,22 @@ import { siteConfig } from "@/lib/site-config";
 import { projects } from "@/data/projects";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const projectRoutes: MetadataRoute.Sitemap = projects.map((project) => ({
-    url: `${siteConfig.url}/projects/${project.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly",
-    priority: 0.7,
-  }));
+  const now = new Date();
 
   return [
+    { url: siteConfig.url, lastModified: now, changeFrequency: "monthly", priority: 1 },
+    { url: `${siteConfig.url}/work`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     {
-      url: siteConfig.url,
-      lastModified: new Date(),
+      url: `${siteConfig.url}/experience`,
+      lastModified: now,
       changeFrequency: "monthly",
-      priority: 1,
+      priority: 0.8,
     },
-    ...projectRoutes,
+    ...projects.map((project) => ({
+      url: `${siteConfig.url}/work/${project.slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
   ];
 }
