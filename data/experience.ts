@@ -11,7 +11,7 @@ export type ExperienceEntry = {
 export const experience: ExperienceEntry[] = [
   {
     company: "Digitize LLC",
-    role: "Laravel Developer (Intern → Contract)",
+    role: "Laravel Developer (Intern)",
     start: "2026-02",
     end: "2026-06",
     location: "Remote, Pakistan",
@@ -27,7 +27,7 @@ export const experience: ExperienceEntry[] = [
   },
   {
     company: "Axoon Solutions",
-    role: "Backend Developer (Intern / Contract)",
+    role: "Backend Developer (Intern)",
     start: "2025-06",
     end: "2025-08",
     location: "Remote, Pakistan",
