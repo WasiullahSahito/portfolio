@@ -163,17 +163,17 @@ function SzabotVisual() {
           steps={[
             "Excel / PDF timetable",
             "Python pipeline",
-            "Parsing",
+            "MongoDB",
             "Intent detection",
-            "3 categories",
-            "Gemini API + RAG",
+            "Classes / exams / events",
+            "Gemini 2.5 Flash + RAG",
             "Real-time answer",
           ]}
-          highlight="Gemini API + RAG"
+          highlight="Gemini 2.5 Flash + RAG"
         />
       </Block>
       <Block title="Admin">
-        <Chain steps={["Admin dashboard", "Timetable upload"]} />
+        <Chain steps={["Admin dashboard", "JWT + bcrypt auth", "Timetable upload"]} />
       </Block>
     </Frame>
   );

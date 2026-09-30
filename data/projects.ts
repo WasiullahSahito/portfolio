@@ -330,54 +330,73 @@ export const projects: Project[] = [
     category: "AI Academic Assistant",
     type: "Final Year Project",
     year: "2025",
-    technologies: ["Python", "RAG", "Google Gemini API", "JavaScript"],
+    technologies: ["React.js (Vite)", "Node.js", "Express.js", "MongoDB", "Python", "Gemini API"],
     overview:
-      "SZABOT is a retrieval-augmented generation (RAG) assistant, built as a Final Year Project on the Google Gemini API, that answers student timetable queries in real time.",
+      "SZABOT is a retrieval-augmented generation (RAG) assistant, built as a Final Year Project with Node.js, Express.js, and the Google Gemini 2.5 Flash API, that answers student questions about classes, exams, and events.",
     built: [
-      "Built a retrieval-augmented generation (RAG) assistant on the Google Gemini API that answers student timetable queries in real time.",
-      "Developed a Python pipeline that parses Excel and PDF timetables and routes queries across 3 categories using intent detection.",
-      "Built an admin dashboard for timetable uploads.",
+      "Built a retrieval-augmented generation (RAG) assistant with Node.js, Express.js, and the Google Gemini 2.5 Flash API that answers student questions about classes, exams, and events.",
+      "Developed a Python parsing pipeline (Pandas, pdfplumber) that converts Excel and PDF timetables into structured MongoDB records via child_process.",
+      "Implemented intent detection to route queries across 3 categories (classes, exams, events) and retrieve batch-specific records.",
+      "Built a React admin dashboard with JWT and bcrypt authentication for timetable uploads and chat log review.",
     ],
     highlights: [
-      "RAG assistant on the Google Gemini API",
-      "Python pipeline parsing Excel and PDF timetables",
-      "Intent detection across 3 categories",
+      "RAG assistant with Node.js, Express.js, and Gemini 2.5 Flash",
+      "Python pipeline (Pandas, pdfplumber) into MongoDB via child_process",
+      "Intent detection across 3 categories: classes, exams, events",
     ],
     features: [
-      "Real-time answers to student timetable queries",
-      "Python pipeline that parses Excel and PDF timetables",
-      "Intent detection that routes queries across 3 categories",
-      "Admin dashboard for timetable uploads",
+      "Real-time answers to student questions about classes, exams, and events",
+      "Python parsing pipeline (Pandas, pdfplumber) converting Excel and PDF timetables into structured MongoDB records via child_process",
+      "Intent detection routing queries across 3 categories and retrieving batch-specific records",
+      "React admin dashboard with JWT and bcrypt authentication for timetable uploads and chat log review",
     ],
     challenges: [
-      "Parsing timetables supplied as Excel and PDF files.",
-      "Routing student queries across 3 categories with intent detection.",
-      "Answering timetable queries in real time.",
+      "Converting Excel and PDF timetables into structured MongoDB records through a Python pipeline bridged to Node.js via child_process.",
+      "Routing student queries across 3 categories — classes, exams, events — with intent detection and retrieving batch-specific records.",
+      "Securing the admin dashboard's timetable uploads and chat log review with JWT and bcrypt authentication.",
     ],
     diagrams: [
       {
         id: "pipeline",
         label: "Query pipeline",
         layers: [
-          step("source", "Excel / PDF timetable", "The source timetables the pipeline parses."),
-          step("python", "Python pipeline", "A Python pipeline that parses Excel and PDF timetables."),
-          step("parsing", "Parsing / processing", "Timetable files are parsed and processed for retrieval."),
-          step("intent", "Intent detection", "Intent detection routes each query across 3 categories."),
-          step("categories", "3 categories", "Queries are routed across 3 categories."),
+          step("source", "Excel / PDF timetable", "The source timetables the Python pipeline parses."),
+          step(
+            "python",
+            "Python pipeline (Pandas, pdfplumber)",
+            "A Python parsing pipeline using Pandas and pdfplumber that converts Excel and PDF timetables into structured records."
+          ),
+          step(
+            "bridge",
+            "child_process bridge",
+            "Node.js child_process bridges the Python parsing pipeline to the Express backend."
+          ),
+          step("mongodb", "MongoDB", "Parsed timetable data is stored as structured MongoDB records."),
+          step(
+            "intent",
+            "Intent detection",
+            "Intent detection routes each query across 3 categories: classes, exams, and events."
+          ),
+          step(
+            "categories",
+            "Classes / exams / events",
+            "Queries are routed across 3 categories and matched to batch-specific records."
+          ),
           step(
             "gemini",
-            "Gemini API + RAG",
-            "A retrieval-augmented generation assistant built on the Google Gemini API."
+            "Gemini 2.5 Flash + RAG",
+            "A retrieval-augmented generation assistant built with Node.js, Express.js, and the Google Gemini 2.5 Flash API."
           ),
-          step("answer", "Real-time answer", "Student timetable queries are answered in real time."),
+          step("answer", "Real-time answer", "Student questions about classes, exams, and events are answered in real time."),
         ],
       },
       {
         id: "admin",
         label: "Admin",
         layers: [
-          step("dashboard", "Admin dashboard", "An admin dashboard for managing timetables."),
-          step("upload", "Timetable upload", "Administrators upload timetables through the dashboard."),
+          step("dashboard", "React admin dashboard", "A React admin dashboard for timetable uploads and chat log review."),
+          step("auth", "JWT + bcrypt auth", "JWT and bcrypt authentication secure the admin dashboard."),
+          step("upload", "Timetable upload", "Administrators upload Excel and PDF timetables through the dashboard."),
         ],
       },
     ],

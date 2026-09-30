@@ -33,10 +33,10 @@ export const labArtifacts: LabArtifact[] = [
   {
     id: "rag",
     tag: "RAG",
-    title: "Timetable question answering",
+    title: "Classes, exams & events question answering",
     summary:
-      "A retrieval-augmented generation assistant on the Google Gemini API that answers student timetable queries in real time.",
-    stages: ["Excel / PDF timetables", "Python pipeline", "Intent detection", "Gemini API + RAG"],
+      "A retrieval-augmented generation assistant with Node.js, Express.js, and the Google Gemini 2.5 Flash API that answers student questions about classes, exams, and events.",
+    stages: ["Excel / PDF timetables", "Python pipeline → MongoDB", "Intent detection", "Gemini 2.5 Flash + RAG"],
     project: "szabot",
     projectLabel: "SZABOT",
   },
